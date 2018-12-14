@@ -1,0 +1,416 @@
+/** {
+	box-sizing: border-box;
+}*/
+
+html,
+body,
+ul,
+li {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+
+iframe {
+	border: none;
+	padding: 0;
+	margin: 0;
+	display: block;
+}
+
+select {
+	height: 26px;
+	padding: 0 12px;
+	appearance: none;
+	-moz-appearance: none;
+	-webkit-appearance: none;
+	background-color: none;
+}
+
+a {
+	text-decoration: none;
+}
+
+
+/*字体包*/
+
+@font-face {
+	font-family: 'myfont01';
+	/*字体名称*/
+	src: url("../assets/font/LCDAT&TPhoneTimeDate.ttf");
+	/*字体源文件*/
+}
+
+.fontFamily01 {
+	font-family: 'myfont01';
+}
+
+@font-face {
+	font-family: 'myfont02';
+	/*字体名称*/
+	src: url("../assets/font/hanyiyuan.ttf");
+	/*字体源文件*/
+}
+
+.fontFamily02 {
+	font-family: 'myfont02';
+}
+
+
+/*清除ie的默认选择框样式清除，隐藏下拉箭头*/
+
+
+/*select::-ms-expand {
+	display: none;
+}*/
+
+.WH100 {
+	width: 100%;
+	height: 100%;
+}
+
+
+/*---------box-sizing-----------*/
+
+.borderBox {
+	box-sizing: border-box;
+}
+
+.absolute {
+	position: absolute;
+}
+
+.relative {
+	position: relative;
+}
+
+.columnStart {
+	display: -webkit-flex;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: flex-start;
+}
+
+.rowStart {
+	display: -webkit-flex;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: flex-start;
+}
+
+.fontSize8 {
+	font-size: 8px;
+}
+
+.fontSize10 {
+	font-size: 10px;
+}
+
+.fontSize12 {
+	font-size: 12px;
+}
+
+.fontSize14 {
+	font-size: 14px;
+}
+
+.fontSize16 {
+	font-size: 16px;
+}
+
+.fontSize18 {
+	font-size: 18px;
+}
+
+.fontSize20 {
+	font-size: 20px;
+}
+
+.fontSize24 {
+	font-size: 24px;
+}
+
+.fontSize28 {
+	font-size: 28px;
+}
+
+.fontSize34 {
+	font-size: 34px;
+}
+
+.colorfff {
+	color: #fff;
+}
+
+.colorccc {
+	color: #ccc;
+}
+
+
+/*标题按钮未点击时文字颜色*/
+
+.color67bae4 {
+	color: #67bae4;
+}
+
+
+/*标题按钮点击后的文字颜色*/
+
+.colorff9933 {
+	color: #ff9933;
+}
+
+.pointer {
+	/*手势*/
+	cursor: pointer;
+}
+/**/
+.zIndex999{
+	z-index: 999;
+}
+/**/
+.nowrap {
+	/*超出的隐藏*/
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	/*width: 100%;*/
+}
+
+.none {
+	display: none!important;
+}
+
+
+/*显示滚动条*/
+
+.overflowY {
+	overflow-y: auto;
+}
+
+
+/*字体阴影*/
+
+.textShadow96dbff {
+	text-shadow: 0 0 10px #96dbff;
+}
+
+
+/*div阴影*/
+
+.boxShadow96dbff {
+	box-shadow: 0 0 10px #96dbff;
+}
+
+.boxShadowIn96dbff {
+	box-shadow: 0 0 30px #96dbff inset;
+}
+
+
+/*div边框和内阴影*/
+
+.divShadow {
+	border: 1px solid #006ba2;
+	-moz-box-shadow: 0px 0px 28px rgba(6, 187, 242, 0.8) inset;
+	box-shadow: 0px 0px 28px rgba(6, 187, 242, 0.8) inset;
+}
+
+
+/*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
+
+.nr_scroll::-webkit-scrollbar {
+	width: 8px;
+	height: 10px;
+	background-color: rgba(58, 138, 145, 0);
+}
+
+.nr_scroll::scrollbar {
+	width: 8px;
+	height: 10px;
+	background-color: rgba(58, 138, 145, 0);
+}
+
+
+/*定义滚动条轨道 内阴影+圆角*/
+
+.nr_scroll::-webkit-scrollbar-track {
+	-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+	box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+	border-radius: 10px;
+	background-color: rgba(58, 138, 145, 0);
+	display: none;
+}
+
+.nr_scroll::scrollbar-track {
+	-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+	box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+	border-radius: 10px;
+	background-color: rgba(58, 138, 145, 0);
+	display: none;
+}
+
+
+/*定义滑块 内阴影+圆角*/
+
+.nr_scroll::-webkit-scrollbar-thumb {
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+	box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+	background-color: rgba(0, 111, 169, 0.5);
+}
+
+.nr_scroll::scrollbar-thumb {
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+	box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+	background-color: rgba(58, 138, 145, 0.5);
+}
+
+
+/*选择框样式*/
+
+.borderSelect {
+	border: 1px solid #00ccde;
+	border-radius: 3px;
+	background: none;
+	box-shadow: 0 0 10px rgba(125, 240, 254, 0.35) inset;
+}
+
+
+/*字体阴影*/
+
+.textShadow {
+	text-shadow: 0 0 10px #96dbff;
+}
+
+
+/*字体加粗*/
+
+.fontWeight600 {
+	font-weight: 600;
+}
+
+
+/*取消input默认样式*/
+
+input {
+	background: none;
+	outline: none;
+	border: 0px;
+}
+
+
+/**/
+
+.borderRadius5 {
+	border-radius: 5px;
+}
+
+
+/*大图片高度*/
+
+.height32 {
+	height: 32px;
+}
+
+
+/*小图片高度*/
+
+.height14 {
+	height: 14px;
+}
+
+.height22 {
+	height: 22px;
+}
+
+
+/*div结构放大*/
+
+.hoverThT {
+	animation: myhover 0.2s forwards;
+	-webkit-animation: myhover 0.2s forwards;
+	/*Safari and Chrome*/
+}
+
+.hoverThD {
+	animation: myhoverD 0.08s forwards;
+	-webkit-animation: myhoverD 0.08s forwards;
+	/*Safari and Chrome*/
+}
+
+@keyframes myhover {
+	from {
+		transform: scale(1, 1);
+		-ms-transform: scale(1, 1);
+		-moz-transform: scale(1, 1);
+		-webkit-transform: scale(1, 1);
+		-o-transform: scale(1, 1);
+	}
+	to {
+		transform: scale(1.2, 1.2);
+		-ms-transform: scale(1.2, 1.2);
+		-moz-transform: scale(1.2, 1.2);
+		-webkit-transform: scale(1.2, 1.2);
+		-o-transform: scale(1.2, 1.2);
+	}
+}
+
+@-webkit-keyframes myhover
+/*Safari and Chrome*/
+
+{
+	from {
+		transform: scale(1, 1);
+		-ms-transform: scale(1, 1);
+		-moz-transform: scale(1, 1);
+		-webkit-transform: scale(1, 1);
+		-o-transform: scale(1, 1);
+	}
+	to {
+		transform: scale(1.2, 1.2);
+		-ms-transform: scale(1.2, 1.2);
+		-moz-transform: scale(1.2, 1.2);
+		-webkit-transform: scale(1.2, 1.2);
+		-o-transform: scale(1.2, 1.2);
+	}
+}
+
+@keyframes myhoverD {
+	from {
+		transform: scale(1.2, 1.2);
+		-ms-transform: scale(1.2, 1.2);
+		-moz-transform: scale(1.2, 1.2);
+		-webkit-transform: scale(1.2, 1.2);
+		-o-transform: scale(1.2, 1.2);
+	}
+	to {
+		transform: scale(1, 1);
+		-ms-transform: scale(1, 1);
+		-moz-transform: scale(1, 1);
+		-webkit-transform: scale(1, 1);
+		-o-transform: scale(1, 1);
+	}
+}
+
+@-webkit-keyframes myhoverD
+/*Safari and Chrome*/
+
+{
+	from {
+		transform: scale(1.2, 1.2);
+		-ms-transform: scale(1.2, 1.2);
+		-moz-transform: scale(1.2, 1.2);
+		-webkit-transform: scale(1.2, 1.2);
+		-o-transform: scale(1.2, 1.2);
+	}
+	to {
+		transform: scale(1, 1);
+		-ms-transform: scale(1, 1);
+		-moz-transform: scale(1, 1);
+		-webkit-transform: scale(1, 1);
+		-o-transform: scale(1, 1);
+	}
+}
