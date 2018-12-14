@@ -81,7 +81,7 @@
       _this.city = json[420000];
       _this.initMap();
       //初始化地图对象 
-	     map=new T.Map("map"); 
+	    //  map=new T.Map("map"); 
     },
     methods: {
       addClassFun: function (item, index) {
@@ -95,134 +95,127 @@
         city_w=item;
       },
       run(){
-        map.clearOverLays();
-        if(province){
-          if(city_w){
-            if(city_w=="市辖区"){
-              area=province+city_w;
-            }else{
-              area=city_w;
-            }
-          }else{
-            area=province;
-          }
-        }
-        this.$options.methods.initMap();
+        // map.clearOverLays();
+        // if(province){
+        //   if(city_w){
+        //     if(city_w=="市辖区"){
+        //       area=province+city_w;
+        //     }else{
+        //       area=city_w;
+        //     }
+        //   }else{
+        //     area=province;
+        //   }
+        // }
+        // this.$options.methods.initMap();
       },
       init(){
-        map.clearOverLays();
-        area="湖北省";
-        this.$options.methods.initMap();
+        // map.clearOverLays();
+        // area="湖北省";
+        // this.$options.methods.initMap();
       },
       search(){
-        map.clearOverLays();
-        area=this.search_content;
-        this.$options.methods.initMap();
+        // map.clearOverLays();
+        // area=this.search_content;
+        // this.$options.methods.initMap();
       },
       initMap() {
-        // var layers = [
-        //   new TileLayer({
-        //     title: "天地图注记",
-        //     source: new XYZSource({
-        //       url: "http://t2.tianditu.com/DataServer?T=vec_w&x={x}&y={y}&l={z}"
-        //     })
-        //   }),
-        //   new TileLayer({
-        //     title: "天地图行政区划",
-        //     source: new XYZSource({
-        //       url:"http://t3.tianditu.com/DataServer?T=cva_w&x={x}&y={y}&l={z}"
-        //     })
-        //   }),
-        //   new TileLayer({
-        //     title: "天地图wms",
-        //     source: new TileWMS({
-        //       url:'http://gisserver.tianditu.gov.cn/tiandituService/wms',
-        //       // projection: 'CGCS2000',
-        //     })
-        //   })
-        // ];
+        var layers = [
+          new TileLayer({
+            title: "天地图注记",
+            source: new XYZSource({
+              url: "http://t2.tianditu.com/DataServer?T=vec_w&x={x}&y={y}&l={z}"
+            })
+          }),
+          new TileLayer({
+            title: "天地图行政区划",
+            source: new XYZSource({
+              url:"http://t3.tianditu.com/DataServer?T=cva_w&x={x}&y={y}&l={z}"
+            })
+          })
+        ];
 
-        // map = new Map({
-        //   layers: layers,
-        //   target: 'map',
-        //   view: new View({
-        //     center: fromLonLat([114.3423400000, 30.5453900000]),
-        //     zoom: 5
-        //   })
-        // });
-	   	//设置显示地图的中心点和级别 
-		// map.centerAndZoom(new T.LngLat(116.40969,39.89945),zoom); 
-    administrative = new T.AdministrativeDivision();
-        var config = {
-          needSubInfo: false,
-          needAll: false,
-          needPolygon: true,
-          needPre: true,
-          searchType: 1,
-          searchWord: area
-        };
-        administrative.search(config, searchResult);
-        function searchResult(result)
-        {
-          if(result.getStatus() == 100) 
-          {
-            var data = result.getData();
-            showMsg(data);
-            // document.getElementById("administrativeMsg").innerHTML = html; 
-          }
-          else 
-          {
-            result.getMsg();
-          }
-        }
+        map = new Map({
+          layers: layers,
+          target: 'map',
+          view: new View({
+            center: fromLonLat([114.3423400000, 30.5453900000]),
+            zoom: 5
+          })
+        });
+	  //  	//设置显示地图的中心点和级别 
+		// // map.centerAndZoom(new T.LngLat(116.40969,39.89945),zoom); 
+    // administrative = new T.AdministrativeDivision();
+    //     var config = {
+    //       needSubInfo: false,
+    //       needAll: false,
+    //       needPolygon: true,
+    //       needPre: true,
+    //       searchType: 1,
+    //       searchWord: area
+    //     };
+    //     administrative.search(config, searchResult);
+    //     function searchResult(result)
+    //     {
+    //       if(result.getStatus() == 100) 
+    //       {
+    //         var data = result.getData();
+    //         showMsg(data);
+    //         // document.getElementById("administrativeMsg").innerHTML = html; 
+    //       }
+    //       else 
+    //       {
+    //         result.getMsg();
+    //       }
+    //     }
         
-        function showMsg(data){
-          for(var i = 0; i < data.length; i++){
-            //解释上级行政区划
-            if(data[i].parents){
-              var upLevel = "";
-              if(data[i].parents.country){
-                upLevel += data[i].parents.country.name;
-              }
-              if(data[i].parents.province){
-                upLevel += data[i].parents.province.name;
-              }
-            }
-            if(data[i].points){
-              //绘制行政区划
-              polygon(data[i].points);
-              console.log(data[i].points);
-            }
-            //解释下级行政区划
-            if(data[i].child){
-              showMsg(data[i].child);
-              if(data[i].child.points){
-                //绘制行政区划
-                polygon(data[i].child.points);
-              }
-            }
-          }
-        }
+    //     function showMsg(data){
+    //       for(var i = 0; i < data.length; i++){
+    //         //解释上级行政区划
+    //         if(data[i].parents){
+    //           var upLevel = "";
+    //           if(data[i].parents.country){
+    //             upLevel += data[i].parents.country.name;
+    //           }
+    //           if(data[i].parents.province){
+    //             upLevel += data[i].parents.province.name;
+    //           }
+    //         }
+    //         if(data[i].points){
+    //           //绘制行政区划
+    //           polygon(data[i].points);
+    //           console.log(data[i].points);
+    //         }
+    //         //解释下级行政区划
+    //         if(data[i].child){
+    //           showMsg(data[i].child);
+    //           if(data[i].child.points){
+    //             //绘制行政区划
+    //             polygon(data[i].child.points);
+    //           }
+    //         }
+    //       }
+    //     }
         
-        function polygon(points){
-          var pointsArr = [];
-              for (var i = 0; i < points.length; i++) {
-                  var regionLngLats = [];
-                  var regionArr = points[i].region.split(",");
-                  for (var m = 0; m < regionArr.length; m++) {
-                      var lnglatArr = regionArr[m].split(" ");
-                      var lnglat = new T.LngLat(lnglatArr[0], lnglatArr[1]);
-                      regionLngLats.push(lnglat);
-                      pointsArr.push(lnglat);
-                  }
-                  //创建面对象
-                var polygon = new T.Polygon(regionLngLats,{color: "red", weight: 3, opacity: 1, fillColor: "#00FF00", fillOpacity: 0.3});
-                //向地图上添加行政区划面
-                map.addOverLay(polygon);
-              }
-              //显示最佳比例尺
-              map.setViewport(pointsArr);
-        }
+    //     function polygon(points){
+    //       var pointsArr = [];
+    //           for (var i = 0; i < points.length; i++) {
+    //               var regionLngLats = [];
+    //               var regionArr = points[i].region.split(",");
+    //               for (var m = 0; m < regionArr.length; m++) {
+    //                   var lnglatArr = regionArr[m].split(" ");
+    //                   var lnglat = new T.LngLat(lnglatArr[0], lnglatArr[1]);
+    //                   regionLngLats.push(lnglat);
+    //                   pointsArr.push(lnglat);
+    //               }
+    //               //创建面对象
+    //             var polygon = new T.Polygon(regionLngLats,{color: "red", weight: 3, opacity: 1, fillColor: "#00FF00", fillOpacity: 0.3});
+    //             //向地图上添加行政区划面
+    //             map.addOverLay(polygon);
+    //           }
+    //           //显示最佳比例尺
+    //           map.setViewport(pointsArr);
+    //     }
       }
     },
     watch: {
