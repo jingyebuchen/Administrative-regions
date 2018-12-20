@@ -1125,13 +1125,14 @@ var animating = false;
   }
   .top10{
     position: absolute;
-    top: 10%;
+    top: 8%;
+    left: 4%;
     z-index: 999999;
   }
   .top20{
     position: absolute;
-    top: 10%;
-    left: 20%;
+    top: 8%;
+    left: 24%;
     z-index: 999999;
   }
 </style>
