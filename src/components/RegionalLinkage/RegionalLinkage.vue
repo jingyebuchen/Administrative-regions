@@ -73,7 +73,7 @@
 
 <script>
   // import VDistpicker from 'v-distpicker'
-  import json from '../../static/districts.json'
+  import json from '../../../static/districts.json'
 
   import Map from 'ol/Map.js';
   import View from 'ol/View.js';
@@ -286,7 +286,7 @@ var routeCoords = route.getCoordinates();
           image: new Icon({
             anchor: [0.5, 1],
             scale:0.1,
-            src: require('../assets/logo.png')
+            src: require('../../assets/logo.png')
           })
         }),
         'geoMarker': new Style({
@@ -413,7 +413,7 @@ var animating = false;
         }
 
         var iconFeature = new Feature(new Point(fromLonLat([114.3423400000, 30.5453900000])));
-        iconFeature.setStyle(createStyle(require('../assets/logo.png'), undefined));
+        iconFeature.setStyle(createStyle(require('../../assets/logo.png'), undefined));
         source = new VectorSource({
           wrapX: false
         });
@@ -488,7 +488,7 @@ var animating = false;
           }),
           new ImageLayer({
             source: new Static({
-              url: require('../assets/colorlight.png'),
+              url: require('../../assets/colorlight.png'),
                projection: 'EPSG:3857',
               imageExtent: extents.HuBei
             })
