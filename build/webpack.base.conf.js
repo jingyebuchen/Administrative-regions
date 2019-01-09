@@ -1,3 +1,4 @@
+var webpack=require('webpack')
 'use strict'
 const path = require('path')
 const utils = require('./utils')
@@ -11,6 +12,13 @@ function resolve (dir) {
 
 
 module.exports = {
+  plugins: [ 
+  new webpack.ProvidePlugin({ 
+    $:"jquery", 
+    jQuery:"jquery", 
+    "windows.jQuery":"jquery"
+  }) 
+  ],
   context: path.resolve(__dirname, '../'),
   entry: {
     app: './src/main.js'

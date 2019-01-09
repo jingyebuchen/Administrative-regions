@@ -396,6 +396,7 @@ var animating = false;
         }
         //     var coord = transform(evt.coordinate, 'EPSG:3857', 'EPSG:4326');
         // var line_f=new Feature(new LineString(coord1));
+        console.log(coord3);
         var line_f=new Feature(new Polygon(coord3));
         line_f.setStyle(linestyle);
 

@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import RegionalLinkage from '@/components/RegionalLinkage/RegionalLinkage'
 import GridMap from '@/components/GridMap/GridMap'
+import wgMap from '@/components/GridMap/wgMap'
 
 Vue.use(Router)
 
@@ -17,6 +18,11 @@ export default new Router({
       path: '/gridmap',
       name: 'gridmap',
       component: GridMap
-    }
+    },
+    {
+      path: '/wgmap',
+      name: 'wgmap',
+      component: wgMap
+    }    
   ]
 })
