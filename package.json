@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@turf/turf": "^5.1.6",
-    "axios": "0.16.2",
+    "axios": "^0.16.2",
     "bootstrap": "^3.3.6",
     "echarts": "^4.1.0",
     "element-ui": "^2.4.0",
@@ -26,7 +26,8 @@
     "v-distpicker": "^1.0.21",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",
-    "vuex": "2.3.1"
+    "vuex": "2.3.1",
+    "rbush": "2.0.2"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",

@@ -76,7 +76,7 @@
               crossOrigin: 'anonymous',
               src: src,
               img: img,
-              scale: 0.1,
+              scale: 1,
               imgSize: img ? [img.width, img.height] : undefined
             }))
           });
@@ -138,6 +138,30 @@
           }
         features.push(range(point00,end11));
         console.log(features);
+        features[0].setStyle(createStyle(require('../../assets/cellgrid/blue_grid.png'), undefined));
+            // features[0].setStyle(new Style({
+            //   stroke: new Stroke({
+            //     color: '#0000ff',
+            //     width: 5
+            //   }),
+            //   // fill: new Fill({
+            //   //   color: 'rgba(255,255,0,1)'
+            //   // }),
+            //   // text: new Text({
+            //   //   text: '550',
+            //   //   font: "bold 12px Times New Roman",
+            //   //   fill: new Fill({
+            //   //     color: '#f00'
+            //   //   }),
+            //   // }),
+            //   image: new Icon({
+            //     anchor: [0.5, 0.5],
+            //     crossOrigin: 'anonymous',
+            //     scale: 10,
+            //     src: '../../assets/cellgrid/red_grid.png'
+            //   }),
+            //   zIndex:100
+            // }));
         //demo默认以1km为单位,画格从左至右,从上至下
         //同一经线上纬度差1°经线长约为111KM.
         //同一纬线圈上,经度差1°,其长约为111*cosαkm.（α为地理纬度）
@@ -172,20 +196,21 @@
           })
         };
         var iconFeature = new Feature(new Point(fromLonLat(point00)));
-        iconFeature.setStyle(createStyle(require('../../assets/logo.png'), undefined));
+        // iconFeature.setStyle(createStyle(require('../../assets/logo.png'), undefined));
+        iconFeature.setStyle(createStyle(require('../../assets/cellgrid/blue_grid.png'), undefined));
         var layers = [
           new TileLayer({
             // extent: extents.HuBei,
             title: "天地图注记",
             source: new XYZSource({
-              url: "http://t2.tianditu.com/DataServer?T=vec_w&x={x}&y={y}&l={z}"
+              url: "http://t2.tianditu.com/DataServer?T=vec_w&x={x}&y={y}&l={z}&tk=c2c3b8a03c3d2a2b8f4afea1227e6891"
             })
           }),
           new TileLayer({
             // extent: extents.HuBei,
             title: "天地图行政区划",
             source: new XYZSource({
-              url: "http://t3.tianditu.com/DataServer?T=cva_w&x={x}&y={y}&l={z}"
+              url: "http://t3.tianditu.com/DataServer?T=cva_w&x={x}&y={y}&l={z}&tk=c2c3b8a03c3d2a2b8f4afea1227e6891"
             })
           }),
           new VectorLayer({

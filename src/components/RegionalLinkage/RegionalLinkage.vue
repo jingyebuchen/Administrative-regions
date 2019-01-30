@@ -73,7 +73,7 @@
 
 <script>
   // import VDistpicker from 'v-distpicker'
-  import json from '../../../static/districts.json'
+  import json from '../../../static/json/districts.json'
 
   import Map from 'ol/Map.js';
   import View from 'ol/View.js';
@@ -1135,6 +1135,9 @@ var animating = false;
     top: 8%;
     left: 24%;
     z-index: 999999;
+  }
+  hr{
+    margin: 0;
   }
 </style>
 <style>
