@@ -250,13 +250,13 @@
 
   let map; //全局map变量
   let featuregrid = []; //全局已处理格子变量
-  let geojson = []; //全局未处理格子变量
   let jsonlayer = ''; //全局格子图层变量
   let layer='';//全局图标图层变量
   let layergroups=[];
   let styles = ''; //全局样式变量
   let op_style = ''; //全局格子样式变量
   let op_style_arr = []; //全局格子样式变量数组
+  let featuregridCoordinates='';//每个格子中心的点
 
   export default {
     name: 'GridMap',
@@ -399,36 +399,36 @@
           target: document.getElementById('mouse-position'),
           undefinedHTML: '&nbsp' //未定义坐标的标记
         });
-        //左下角控件
-        var overviewMapControl = new OverviewMap({
-            // see in overviewmap-custom.html to see the custom CSS used
-            target: 'overview',
-            className:'overviewmap',
-            layers: [
-              new TileLayer({
-                className: 'bw',
-                title: "天地图行政区划",
-                source: new XYZSource({
-                  url: "http://t2.tianditu.com/DataServer?T=vec_w&x={x}&y={y}&l={z}&tk=c2c3b8a03c3d2a2b8f4afea1227e6891"
-                })
-              }),
-              new TileLayer({
-                className: 'bw',
-                title: "天地图注记",
-                source: new XYZSource({
-                  url: "http://t3.tianditu.com/DataServer?T=cva_w&x={x}&y={y}&l={z}&tk=c2c3b8a03c3d2a2b8f4afea1227e6891"
-                })
-              }),
-            ],
-            view: new View({
-              projection: 'EPSG:4326',
-              // center: [106.54, 29.40],
-              center: [106.70, 29.36],
-              zoom: 13,
-              maxZoom: 18
-            }),
-            collapsible: false
-          });
+        // //左下角控件
+        // var overviewMapControl = new OverviewMap({
+        //     // see in overviewmap-custom.html to see the custom CSS used
+        //     target: 'overview',
+        //     className:'overviewmap',
+        //     layers: [
+        //       new TileLayer({
+        //         className: 'bw',
+        //         title: "天地图行政区划",
+        //         source: new XYZSource({
+        //           url: "http://t2.tianditu.com/DataServer?T=vec_w&x={x}&y={y}&l={z}&tk=c2c3b8a03c3d2a2b8f4afea1227e6891"
+        //         })
+        //       }),
+        //       new TileLayer({
+        //         className: 'bw',
+        //         title: "天地图注记",
+        //         source: new XYZSource({
+        //           url: "http://t3.tianditu.com/DataServer?T=cva_w&x={x}&y={y}&l={z}&tk=c2c3b8a03c3d2a2b8f4afea1227e6891"
+        //         })
+        //       }),
+        //     ],
+        //     view: new View({
+        //       projection: 'EPSG:4326',
+        //       // center: [106.54, 29.40],
+        //       center: [106.70, 29.36],
+        //       zoom: 13,
+        //       maxZoom: 18
+        //     }),
+        //     collapsible: false
+        //   });
         //全局样式变量   
         styles = {
           'grid': new Style({
@@ -487,7 +487,8 @@
         //全局地图对象
         map = new Map({
           controls: defaultControls().extend([
-            new FullScreen(), mousePositionControl,overviewMapControl
+            // new FullScreen(), mousePositionControl,overviewMapControl
+            new FullScreen(), mousePositionControl
           ]),
           layers: layers,
           target: 'map',
@@ -563,8 +564,14 @@
           }
           map.getTargetElement().style.cursor =
             map.hasFeatureAtPixel(evt.pixel) ? 'pointer' : '';
+          var pixel = map.getEventPixel(evt.originalEvent);
+          var feature = map.forEachFeatureAtPixel(pixel, function (feature) { return feature; });//查询方式有很多 
+          if(feature){
+            featuregridCoordinates=feature.getGeometry().getInteriorPoint().getCoordinates();
+          }
         });
-
+        //左下角控件
+          
         //调用请求默认网格、列表数据方法
         this.$options.methods.request(1000, this);
         this.$options.methods.addpoint();
@@ -619,6 +626,7 @@
           })
           .then(function (response) {
             var y=response.data.data.area;
+            //轮廓线
             var regionLngLats = [];
             var coord3 = [
               []
@@ -650,8 +658,8 @@
                 projection: 'EPSG:4326'
               }),
             }));
+            //每个网格
             var x = JSON.parse(response.data.data.grid).features;
-            geojson = x;
             for (var i = 0; i < x.length; i++) {
               var y = new GeoJSON().readFeature(x[i]);
               y.setId('' + i + '');
@@ -660,9 +668,9 @@
                   color: '#40a1c2',
                   width: 1
                 }),
-                // fill: new Fill({
-                //   color: 'rgba(0,255,0,0.2)'
-                // }),
+                fill: new Fill({
+                  color: 'rgba(0,0,0,0)'
+                }),
                 text: new Text({
                   text: '' + x[i].properties.num==0?'':x[i].properties.num + '',
                   // text: '' + x[i].properties.num + '',
@@ -676,7 +684,8 @@
               y.setStyle(op_style);
               featuregrid.push(y);
             }
-            // console.log(featuregrid);
+            console.log(featuregrid);
+            console.log(featuregrid[518].getGeometry());
             jsonlayer = new VectorLayer({
               source: new VectorSource({
                 features: featuregrid,
@@ -684,29 +693,18 @@
               }),
             })
             map.addLayer(jsonlayer);
-            // var arr=[{index:517,color:'red'},{index:550,color:'orange'},{index:551,color:'orange'},{index:584,color:'blue'},{index:585,color:'red'}];
-            // for(var i=0;i<arr.length;i++){
-            //   var polylayer = new ImageLayer({
-            //     source: new Static({
-            //       url: require('../../assets/cellgrid/'+arr[i].color+'_grid.png'),
-            //       projection: 'EPSG:4326',
-            //       imageExtent: featuregrid[arr[i].index].getGeometry().getExtent()
-            //     })
-            //   })
-            //     map.addLayer(polylayer);
-            // }
           })
           .catch(function (error) {
             console.log(error);
           });
-        //请求列表
+        //请求每个网格事件
         b.$axios.post('http://192.168.124.50:8090/createGridData', {
             gridID: 1,
             sideUnit: a
           })
           .then(function (response) {
             var x = response.data.data;
-            console.log(x);
+            // console.log(x);
             for (var i = 0; i < x.length; i++) {
               for (var h = 0; h < featuregrid.length; h++) {
                 if (x[i].gid == featuregrid[h].values_.gid) {
@@ -730,18 +728,19 @@
                   imageExtent: featuregrid[x[i].gid].getGeometry().getExtent()
                 })
               }))
-              console.log('3');
+              // console.log('3');
             }
             let polylayer=new LayerGroup({
               layers: layergroups.slice(0,50)
             })
             map.addLayer(polylayer);
-            console.log(x);
-            console.log(polylayer);
+            // console.log(x);
+            // console.log(polylayer);
           })
           .catch(function (error) {
             console.log(error);
           });
+        //请求列表
         b.$axios.post('http://192.168.124.50:8090/getGridDataDetail', {
             gridID: 1,
             sideUnit: a
